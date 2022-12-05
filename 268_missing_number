@@ -1,0 +1,26 @@
+class Solution {
+    public int missingNumber(int[] nums) {
+        int i=0;
+        //cyclic sort number where we ignore the number which is at higher index
+        while(i<nums.length){
+        //correct shows correct index of the element
+            int correct=nums[i];
+            if(nums[i]<nums.length && nums[i]!=nums[correct] ){
+                
+                int temp=nums[i];
+                nums[i]=nums[correct];
+                nums[correct]=temp;
+            }
+            else{
+                i++;
+            }     
+        }
+       //search for missing number
+        for(int j=0;j<nums.length;j++){
+            if(nums[j]!=j)
+                return j;
+        }
+        //if not found it will return numslength
+        return nums.length;
+    }
+}
