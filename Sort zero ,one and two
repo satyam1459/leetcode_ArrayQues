@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+    static void printArray(int[] ar){
+        for(int i:ar)   System.out.print(i+" ");
+    }
+    static void swap(int[] ar,int i,int j){
+        int temp=ar[i];
+        ar[i]=ar[j];
+        ar[j]=temp;
+    }
+    
+
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] ar=new int[n];
+        for(int i=0;i<n;i++)    ar[i]=sc.nextInt();
+        
+        int l=0; int r=n-1;
+        int m=0;
+        while(m<=r){
+            if(ar[m]==0){
+                swap(ar,m,l);
+                l++; m++; 
+            }
+            else if(ar[m]==2){
+                swap(ar,m,r);
+                r--;
+            }
+            else  m++;
+        }
+        printArray(ar);
+    }
+}
