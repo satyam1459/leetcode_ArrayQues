@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/find-the-duplicate-number/
+
+class Solution {
+    public int findDuplicate(int[] nums) {
+     int i=0;
+        int ans=0;
+        //cyclic sort number 
+        while(i<nums.length){
+            if (nums [i] != i+1){
+        //correct shows correct index of the element
+            int correct=nums[i]-1   ;
+            if(nums[i]!=nums[correct] ){   
+                int temp=nums[i];
+                nums[i]=nums[correct];
+                nums[correct]=temp;
+            }
+            else
+                return nums[i];
+            }else{
+                i++;
+            }     
+        }
+             return -1;
+    }
+}
