@@ -1,0 +1,38 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        //Copy into temp array
+       int[] temp=Arrays.copyOf(nums,nums.length);
+       //Make a array to store indices of two array 
+        int[] ans=new int[2];
+        //Sort array so that we can apply two pointer approach in O(n) time complexity
+        Arrays.sort(temp);
+        //initialising of two pointers
+        int l=0; int r=nums.length-1;
+        //Finding elements which gave target sum into temporary array
+            while(true){
+                if(temp[l]+temp[r]==target){
+                   break;
+                }
+                else if(temp[l]+temp[r]>target)
+                    r--;
+                else
+                    l++;
+            }
+        //Finding elements index in original array
+        int idx1=-1;
+        int idx2=-1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==temp[l] || nums[i]==temp[r]){
+                if(idx1==-1){
+                    idx1=i;
+                }
+                else
+                    idx2=i;
+            }
+        }
+        ans[0]=idx1;
+        ans[1]=idx2;
+        return ans;
+    }
+    
+}
