@@ -1,0 +1,22 @@
+class Solution {
+    public String reverseWords(String s) {
+     char[] a=s.toCharArray();
+     int j=-1;      //Track first character of every word after space 
+     int start=0; int reverseIdx=0;
+     for(int i=0;i<a.length;i++){
+         if(a[i]== ' ' || i==a.length-1){
+              reverseIdx=(i==a.length-1 )? i:i-1;
+         }
+         
+         while(start < reverseIdx){
+             char temp=a[start];
+             a[start++]=a[reverseIdx];
+             a[reverseIdx--]=temp;
+         }
+         if(a[i]==' ' || i==0){
+              start= (i==0)? 0: i+1;
+         }  
+     }
+     return new String(a);   
+    }
+}
