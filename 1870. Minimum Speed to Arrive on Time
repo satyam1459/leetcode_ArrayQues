@@ -1,0 +1,40 @@
+class Solution {
+   public boolean check(int[] a, int m, double h){
+    int n=a.length;
+    double total=0;
+    for(int i=0;i<n;i++){
+         double timeTaken=0.0;
+            if(i==n-1)
+                timeTaken = (double)a[i]/m;
+           else  
+            timeTaken = Math.ceil(Math.max((double)a[i]/m, 1.0)); 
+/*If a train takes 3.3 hrs. to reach a place. The person cannot board the next train immediately , as the next train will come only at 4 hr. mark. Hence , we have to wait for an extra 0.7 hr. Hence , in this case , time taken to reach one place is 4 hr. (even if the first train takes lesser time).
+Hence , we say , the min. time required to go from one station to another is 1hr ( not 0 hr. as a train cannot be as fast as light!!! : ) .*/
+        total += (timeTaken);
+    }
+    return total<=h;
+}
+
+public int minSpeedOnTime(int[] dist, double hours) {
+    /*when , length of dist. array > timelimit , then it is impossible to reach office in time , hence, return -1.*/
+     // min. time required to reach office = dist.length
+        //it is impossible to reach office if (dist.length)> hour
+    if(dist.length > Math.ceil(hours)) return -1;
+    
+    int n = dist.length;
+    //minS --> minimum speed
+    //maxS --> maximum speed 
+    int minS=1, maxS=1000000000;
+    
+    while(minS <= maxS){
+        int mid= minS+ (maxS-minS)/2;
+         boolean inspect=check(dist, mid, hours);
+        if(inspect){
+           maxS=mid - 1;  //further minimise the speed
+        }else{
+            minS=mid + 1;
+        }
+    }
+    return minS;
+}
+}
